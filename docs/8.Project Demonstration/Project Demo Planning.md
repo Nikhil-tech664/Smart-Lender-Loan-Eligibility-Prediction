@@ -15,11 +15,11 @@ Plan the timeline, sections, and ownership for the final project demonstration s
 
 | S.No | Demo Section | Description | Duration (mins) | Responsible Member |
 | :--- | :--- | :--- | :--- | :--- |
-| **1** | Introduction & Problem | Introduce Team, Project Title, and manual underwriting challenges. | 2 mins | Team Lead |
-| **2** | ML Model Pipeline | Detail dataset parameters, feature selection, and precision scores. | 3 mins | ML Engineer |
-| **3** | Backend & Veto Logic | Explain Flask routing, JSON requests, and Credit History veto engine. | 3 mins | Backend Developer |
-| **4** | Frontend Live Demo | Perform live applicant submissions, theme toggle, and error checks. | 4 mins | UI Developer |
-| **5** | Q&A Session | Answer evaluator questions regarding deployment, parameters, and risk. | 3 mins | All Members |
+| **1** | Problem Statement Intro | Outline traditional manual underwriting bottlenecks and customer dropouts. | 2 mins | Team Lead (Nikhil) |
+| **2** | Model Preprocessing | Explain encoders, StandardScaler transformation, and 6-model benchmarks. | 3 mins | ML Engineer |
+| **3** | Rules Veto Engine | Detail how credit history and DTI limits intercept probability results. | 3 mins | Backend Developer |
+| **4** | UI Interface demo | Demonstrate dark/light transitions, income sliders, and results. | 4 mins | UI Developer |
+| **5** | Q&A Session | Answer evaluator questions regarding system limits and scalability. | 3 mins | All Members |
 
 ---
 
@@ -29,7 +29,7 @@ Identify the chronological progression of the presentation:
 
 | Step | Activity | Notes |
 | :--- | :--- | :--- |
-| **1** | Introduction & Problem Statement | Explain how manual credit checks result in customer churn. |
-| **2** | Solution Overview | High-level system architecture showing presentation-API-data layers. |
-| **3** | Live Feature Demonstration | Submit 1 approved profile (Credit=1.0) and 1 vetoed profile (Credit=0.0). |
-| **4** | Q&A Session | Detail model retraining pipelines and scale extensions. |
+| **1** | Introduction & Problem | Connect slow credit decisions with customer dropouts. |
+| **2** | Architecture Walkthrough | Walk through presentation, API routing, core logic, and model data layers. |
+| **3** | Live Interactive Demo | Submit approved profile vs credit-vetoed profile live. |
+| **4** | Q&A Session | Detail Gunicorn performance scaling and PostgreSQL roadmap plans. |

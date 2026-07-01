@@ -14,14 +14,14 @@
 Establish formal communication plans and presentation guidelines for delivering the SmartLender AI demonstration.
 
 ### Presentation Design Guidelines
-1. **Core Message:** Focus on how automated AI classification minimizes bank underwriting processing latency from days to under 200ms.
-2. **Visual Clues:** Use real-time interactive UI demo screens to demonstrate inputting edge case financial profiles.
-3. **Language:** Avoid overly dense mathematical notation; focus on validation metrics (82.3% accuracy, 91.2% recall) and how credit history vetoes mitigate risk.
+1. **Core Message:** Automating manual underwriting checks eliminates delays, reducing response times to under 200ms.
+2. **Telemetry Visuals:** Use feature importances (e.g. Credit_History = 0.32 weight) to explain decision variables clearly.
+3. **Guardrail Focus:** Highlight how underwriting vetoes (Credit_History = 0) minimize financial default risk.
 
 ### Communication History Logs
 
 | Interaction Date | Target Audience / Role | Purpose of Communication | Outcome / Feedback Received |
 | :--- | :--- | :--- | :--- |
-| **10 March 2026** | SmartBridge Mentor | Design phase architectural review and veto rules validation. | Approved DTI limits adjustments to avoid false rejections. |
-| **14 March 2026** | Team Sync | Project planning sprint estimation mapping. | Aligned backlog allocations and code reviews. |
-| **18 March 2026** | Mock Evaluators | Final system walkthrough and testing audit metrics. | Commended responsive dark/light style UI card component. |
+| **10 March 2026** | SmartBridge Mentor | Underwriting rules limits review session. | Approved generous DTI limits (up to 85%) to avoid false rejections. |
+| **14 March 2026** | Project Team | Backlog allocation and timeline sync. | Defined tasks, estimated story points, and finalized encoders structure. |
+| **18 March 2026** | External Reviewer | Pre-demonstration application dry run. | Recommended adding explanatory bullet points to the results panel. |

@@ -16,24 +16,19 @@ Replicate the core empathy mapping layout representing user behaviors, expressio
 ```
 +-----------------------------------------------------+-----------------------------------------------------+
 |                       THINKS                        |                        SAYS                         |
-| - "Is my self-employed income enough to be          | - "I hope they approve my application quickly; my   |
-|   approved?"                                        |   business expansion is waiting."                   |
-| - "Why does credit history carry so much weight?"   | - "The documentation required is too complex and    |
-| - "Will minor debts hurt my eligibility status?"    |   confusing."                                       |
-| - "I wish I knew the decision in real-time."        | - "Why was I rejected when my income is high?"      |
+| - "Will my $4,500 monthly income qualify me for a   | - "Why do I have to wait weeks just to find out if   |
+|   $200,000 loan?"                                   |   I'm eligible for a home loan?"                    |
+| - "How heavily does my property's Rural or Urban    | - "I wish the system explained why I got rejected   |
+|   location affect my approval chances?"             |   instead of just showing a generic error page."    |
+| - "Is it safe to upload my personal financial       | - "The sliders let me adjust my loan term and       |
+|   details to this online application?"              |   amounts instantly to see qualified ranges."       |
 +-----------------------------------------------------+-----------------------------------------------------+
 |                        DOES                         |                        FEELS                        |
-| - Checks eligibility criteria online before         | - Anxious while waiting for standard underwriting.  |
-|   submitting.                                       | - Confident when inputting clean credit history.    |
-| - Prepares income statements, tax returns, and co-  | - Overwhelmed by lengthy financial forms.           |
-|   borrower details.                                 | - Relieved when receiving clear real-time           |
-| - Contacts customer support for rejection clarity.  |   feedback.                                         |
+| - Inputs specific personal data (Gender, Married,   | - Anxious about the high risk of rejection due to   |
+|   Graduate status) into the interactive form.       |   lack of co-applicant income.                      |
+| - Toggles the dark/light interface mode for better  | - Optimistic when using the interactive real-time   |
+|   readability in dark rooms.                        |   AI stepped loader.                                |
+| - Adjusts the Loan Amount and Term sliders          | - Reassured by clear, structured validation text    |
+|   dynamically to re-run the prediction engine.      |   explaining underwriting vetoes.                   |
 +-----------------------------------------------------+-----------------------------------------------------+
 ```
-
-### Empathy Map Quadrants Description
-
-- **Thinks (What is the customer thinking?):** The customer wants a simple, automated system that looks at their complete financial profile fairly instead of relying solely on binary credit scores.
-- **Says (What does the customer say?):** Expresses the need for fast response times, fewer fields, and readable validation errors.
-- **Does (What does the customer do?):** Gathers all tax documents, reviews credit scores manually, and submits forms online via the responsive UI portal.
-- **Feels (What is the customer feeling?):** Struggles with the lack of transparency in traditional bank processing, but feels optimistic when using SmartLender AI's instant response system.

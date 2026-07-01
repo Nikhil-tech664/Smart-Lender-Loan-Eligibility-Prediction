@@ -15,11 +15,11 @@ This document tracks whether each proposed functional feature was successfully i
 
 | S.No | Feature Name | Description | Status (Implemented / Partial / Pending) | Demonstrated (Yes / No) | Remarks |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **1** | Dark/Light Mode Theme | Instant UI color transition without reloading state variables. | **Implemented** | **Yes** | Fully responsive under mobile emulation tests. |
-| **2** | ML Preprocessing Scaler | Transforms numerical applicant inputs to match dataset scale bounds. | **Implemented** | **Yes** | Uses pre-built joblib loading pipelines. |
-| **3** | Underwriting Rules Veto | Intercepts prediction routes to veto zero credit histories. | **Implemented** | **Yes** | Successfully vetoes invalid profiles immediately. |
-| **4** | Instant Result Display | Shows clear result status card accompanied by detailed factors list. | **Implemented** | **Yes** | Uses asynchronous JSON response binding. |
-| **5** | Dynamic API Endpoint | Allows third-party clients to POST JSON applicant payloads. | **Implemented** | **Yes** | Tested clean via mock python requests. |
+| **1** | Dark/Light Mode Theme | Toggle UI colors instantly using CSS variables. | **Implemented** | **Yes** | Fully responsive layout verified. |
+| **2** | ML Preprocessing | Map categoricals and scale numerical features dynamically using joblib scalers. | **Implemented** | **Yes** | Encapsulated in single model pkl file. |
+| **3** | Underwriting Rules Veto | Intercept predictions to veto 0.0 credit history, >8.0 LTI, or >85% DTI. | **Implemented** | **Yes** | Prevents high-risk loan approvals. |
+| **4** | Dynamic Result Display | Explains prediction outcomes with clear validation flags. | **Implemented** | **Yes** | Leveraged dynamically built AJAX lists. |
+| **5** | REST Telemetry Endpoint | Provides model statistics and feature importances. | **Implemented** | **Yes** | Exposed at `/model-telemetry` route. |
 
 ---
 

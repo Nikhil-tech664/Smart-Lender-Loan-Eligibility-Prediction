@@ -18,9 +18,9 @@ Summarize the key attributes of the implemented code and repository hosting deta
 | **Repository Link / URL** | https://github.com/Nikhil-tech664/Smart-Lender-Loan-Eligibility-Prediction.git |
 | **Programming Language(s)** | Python, HTML5, CSS3, JavaScript |
 | **Framework(s) Used** | Flask, scikit-learn, Pandas, NumPy |
-| **Key Features Implemented** | - Real-time ML eligibility scoring.<br>- Hard credit history veto checks.<br>- Sleek responsive user form interface with dark/light mode toggle. |
-| **Pending / Incomplete Features** | - Automatic email result notification reports.<br>- Historical prediction audit logging dashboard. |
-| **Setup / Run Instructions** | 1. Clone repository.<br>2. Run `pip install -r requirements.txt`.<br>3. Start app using `python app.py`. |
+| **Key Features Implemented** | - Multi-classifier training comparisons (Logistic Regression, Random Forest, SVM).<br>- Automated DTI and LTI metrics calculation.<br>- Stepped UI progress loader and dark/light toggles. |
+| **Pending / Incomplete Features** | - PDF report generation downloads.<br>- Multi-user dashboard portal. |
+| **Setup / Run Instructions** | 1. Clone codebase.<br>2. Run `pip install -r requirements.txt`.<br>3. Run `python train_model.py` to generate dataset and pickle file.<br>4. Run `python app.py` and navigate to `http://localhost:5000`. |
 
 ---
 
@@ -30,12 +30,9 @@ Rate the alignment of the codebase against standard software engineering and des
 
 | S.No | Criteria | Status (Yes / No) | Remarks |
 | :--- | :--- | :--- | :--- |
-| **1** | Code is modular and organized into functions / classes | **Yes** | Standard modular files: `app.py` for routing, `train_model.py` for training pipeline. |
-| **2** | Meaningful variable and function names are used | **Yes** | Explicit domain mappings: `ApplicantIncome`, `Credit_History`, `check_eligibility`. |
-| **3** | Code includes comments / documentation where necessary | **Yes** | Comprehensive inline comments mapping input JSON parsing steps and DTI calculation rules. |
-| **4** | Error handling is implemented for critical operations | **Yes** | Try-catch block wraps the joblib pickle loader and scales the numerical columns safely. |
-| **5** | The application runs without critical errors | **Yes** | Integration tests verified clean execution of the web server routes. |
-| **6** | Code is committed to a version control repository | **Yes** | Standard commits logged on the GitHub main branch. |
-
-### Additional Notes / Comments
-The underwriting logic implements strict safeguards: an applicant with `Credit_History` equal to `0.0` is immediately rejected. Permissive limits have been established for high Debt-to-Income (DTI up to 85%) and Loan-to-Income (LTI up to 8x annual income) to prevent false rejections of valid applicants.
+| **1** | Code is modular and organized into functions / classes | **Yes** | Modular pipeline separates model training (`train_model.py`) from API endpoints (`app.py`). |
+| **2** | Meaningful variable and function names are used | **Yes** | Exposes clear mappings: `ApplicantIncome`, `Credit_History`, `load_ml_artifact`. |
+| **3** | Code includes comments / documentation where necessary | **Yes** | Detailed inline code comments explaining scaling calculations and error exceptions. |
+| **4** | Error handling is implemented for critical operations | **Yes** | Try-catch exceptions wrap JSON request decoding, model loading, and scaling. |
+| **5** | The application runs without critical errors | **Yes** | Passed standard Flask server runtime checks and local integration tests. |
+| **6** | Code is committed to a version control repository | **Yes** | Synchronized with origin/main branch on remote GitHub repository. |

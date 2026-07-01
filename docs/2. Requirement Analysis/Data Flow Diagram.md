@@ -15,10 +15,10 @@ Use the standard data flow diagram (DFD) components to illustrate how applicant 
 
 | Symbol | Name | Description |
 | :--- | :--- | :--- |
-| **Oval / Rounded shape** | External Entity | A person, organization, or system outside the project that sends or receives data (e.g., Customer, Underwriter). |
-| **Rectangle with numbered header** | Process | An activity that transforms incoming data into outgoing data (e.g., Validate Request, Calculate Eligibility). |
-| **Rectangle (solid fill, no number)** | Data Store | A place where data is held for later use (e.g., Model Storage, Logs). |
-| **Labeled arrow** | Data Flow | The movement of data between entities, processes, and data stores. |
+| **Oval / Rounded shape** | External Entity | A person, organization, or system outside the project boundaries (e.g., Customer, Underwriter). |
+| **Rectangle with numbered header** | Process | An activity that transforms incoming data into outgoing data (e.g., Encode Categoricals, Scale Numerical Features). |
+| **Rectangle (solid fill, no number)** | Data Store | A place where data is cached for retrieval (e.g., model_artifact dict, encoders list). |
+| **Labeled arrow** | Data Flow | The movement of data between processes and stores. |
 
 ---
 
@@ -26,19 +26,18 @@ Use the standard data flow diagram (DFD) components to illustrate how applicant 
 
 ```mermaid
 graph TD
-    User([User / Applicant]) -- 1. Submit Profile JSON --> PR[1. Request Handling & Validation]
-    PR -- 2. Scale & Preprocess --> FE[2. ML Feature Engineering]
-    FE -- 3. Query Scaler & Pipeline --> DS[Model Store: loan_model.pkl]
-    DS -- 4. Load Models & Thresholds --> FE
-    FE -- 5. Predict Probabilities --> RU[3. Underwriting Rules Veto Engine]
-    RU -- 6. Apply Credit Veto / DTI Check --> RU
-    RU -- 7. Build Response JSON --> NO[4. Result Notification]
-    NO -- 8. Return UI Response Card --> User
+    User([User / Applicant]) -- 1. Submit Profile JSON --> PR[1. Request Validation app.py]
+    PR -- 2. Check Fields & Limits --> ER[2. Encoders & Preprocessing]
+    ER -- 3. Map Categorical strings --> LE[Data Store: encoders dict]
+    ER -- 4. Standardize Numericals --> SC[Data Store: scaler object]
+    ER -- 5. Execute ML Predict --> CLF[3. Random Forest Model]
+    CLF -- 6. Fetch Model Object --> MD[Data Store: model object]
+    CLF -- 7. Predict Probability --> RU[4. Underwriting Guardrails Engine]
+    RU -- 8. Apply Credit History Veto / LTI Cap --> RU
+    RU -- 9. Return Telemetry & Result JSON --> OUT([User Result UI Card])
 ```
 
 ### Component Details
-1. **User / Applicant:** Submits parameters (Gender, Married, Dependents, Education, Self_Employed, ApplicantIncome, CoapplicantIncome, LoanAmount, Loan_Amount_Term, Credit_History, Property_Area) via the web frontend.
-2. **Request Handling & Validation:** Flask handler validates input values, checking for correct ranges.
-3. **ML Feature Engineering:** Scales input numerical features using the pre-loaded Pickle preprocessor.
-4. **Underwriting Rules Veto Engine:** Intercepts predictions to enforce credit score constraints (Veto if Credit_History = 0).
-5. **Result Notification:** Formats response into clean decision results for the UI card.
+1. **Request Validation (`app.py`):** Ensures numeric fields are positive and checks for missing categorical features.
+2. **Encoders & Preprocessing:** Maps values (`Graduate` to 1, `Rural` to 0, etc.) and scales incomes using `scaler.transform()`.
+3. **Underwriting Guardrails Engine:** Performs credit score veto logic (`Credit_History == 0.0`) and calculates Debt-to-Income (DTI) metrics.

@@ -13,8 +13,8 @@
 
 | Parameter | Details |
 | :--- | :--- |
-| **Objective** | To automate the loan pre-qualification and eligibility prediction process using machine learning to replace slow, manual credit reviews. |
-| **Scope** | Includes applicant data acquisition, pipeline data cleaning, machine learning model training, and a Flask web service for public eligibility checking. |
+| **Objective** | Develop an automated credit evaluation and decision system using scikit-learn classifiers and Flask to provide real-time loan eligibility predictions. |
+| **Scope** | Includes preprocessing data pipelines, model optimization, underwriting rules integration, and responsive dark/light mode frontends. |
 
 ---
 
@@ -22,8 +22,8 @@
 
 | Parameter | Details |
 | :--- | :--- |
-| **Description** | Traditional manual underwriting causes significant delays, inconsistencies, and high rejection rates for creditworthy applicants. |
-| **Impact** | Increases customer churn, delays real-estate transactions, and leads to operational inefficiencies inside banking branches. |
+| **Description** | Manual lending desks create transaction backlogs, lack consistency, and result in false rejections for qualified non-traditional applicants. |
+| **Impact** | Increases customer dropouts, leads to lost commission revenue, and increases administrative processing costs. |
 
 ---
 
@@ -31,23 +31,22 @@
 
 | Parameter | Details |
 | :--- | :--- |
-| **Approach** | Train a highly tuned Random Forest classifier alongside helper classifiers, and host them inside a responsive Flask micro-service. |
-| **Key Features** | - Dark/Light mode theme toggle UI.<br>- Real-time validation error alerts.<br>- ML probability scoring combined with strict credit veto rules. |
+| **Approach** | Build a unified ML service loaded from joblib binaries. Check applicant profiles through a combined rules veto and Random Forest probability engine. |
+| **Key Features** | - Dynamic sliders for Applicant Income ($100 - $81,000) and Loan Amount ($10 - $700k).<br>- Instant status cards with confidence classifications (Low Risk vs High Risk). |
 
 ---
 
 ## Resource Requirements
 
 ### Hardware Requirements
-- **Computing Resources:** CPU/GPU for training (e.g. CPU or basic T4 GPU for training benchmarks).
-- **Memory:** 8 GB RAM minimum.
-- **Storage:** 1 TB SSD for development workspace, model checkpoints, and documentation assets.
+- **Computing Resources:** CPU/GPU training resources (standard multi-core CPU is sufficient for training the 6 classification algorithms in seconds).
+- **Memory:** 8 GB DDR4 RAM.
+- **Storage:** 200 MB disk space for code files, data, and serialized pickle files.
 
 ### Software Requirements
-- **Frameworks:** Python Flask Framework.
-- **Libraries:** scikit-learn, pandas, numpy, matplotlib, seaborn.
-- **Development Environment:** VS Code, Jupyter Notebook.
+- **Frameworks & Libraries:** Python 3.9+, Flask, scikit-learn, joblib, pandas, numpy, matplotlib, seaborn.
+- **Development Tooling:** VS Code, Git, Chrome DevTools.
 
 ### Data Requirements
-- **Data Source:** Kaggle Loan Prediction Dataset.
-- **Size & Format:** 614 rows × 13 columns, CSV format.
+- **Data Source:** Synthetic dataset mimicking standard Kaggle Loan Prediction criteria.
+- **Attributes:** 614 rows containing 11 features and 1 label column.

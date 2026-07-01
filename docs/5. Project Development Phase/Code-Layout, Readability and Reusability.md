@@ -15,14 +15,14 @@ Evaluate the formatting, readability, and structural modularity of the source fi
 
 | S.No | Code Quality Parameter | Description | Followed (Yes / No / Partial) | Remarks |
 | :--- | :--- | :--- | :--- | :--- |
-| **1** | Consistent Indentation | Uniform spacing/tabs used throughout the code. | **Yes** | Standard PEP 8 4-space indentation enforced. |
-| **2** | Proper File Structure | Files and folders are logically organized. | **Yes** | Clean directory mapping: `static/`, `templates/`, `model/`, `docs/`. |
-| **3** | Meaningful Variable Names | Variables reflect their purpose clearly. | **Yes** | Uses native dataset features matching raw input JSON attributes. |
-| **4** | Function / Method Names | Functions are descriptively named. | **Yes** | Standardized naming e.g., `predict_loan_status()`, `load_classifier()`. |
-| **5** | Code Comments | Inline and block comments explain logic. | **Yes** | Comments detail scaler loading and feature vector formatting. |
-| **6** | Modular Design | Code is split into reusable functions/modules. | **Yes** | Modular pipeline decoupling dataset creation from user routing logic. |
-| **7** | No Redundant Code | Duplicate or unused code is removed. | **Yes** | Functions are refactored; test files are separated from source modules. |
-| **8** | Error Handling | Exceptions and errors are handled gracefully. | **Yes** | Logs errors to console and returns JSON error payloads to users. |
+| **1** | Consistent Indentation | Clean 4-space indentations used throughout python modules. | **Yes** | Standard PEP 8 formatting enforced. |
+| **2** | Proper File Structure | Logical folder mapping. | **Yes** | Standard directory alignment: `/static`, `/templates`, `/model`. |
+| **3** | Meaningful Variable Names | Explicit feature naming. | **Yes** | Variables map to dataset attributes directly. |
+| **4** | Function / Method Names | Descriptive routing names. | **Yes** | Methods like `predict()` and `health()` named by function. |
+| **5** | Code Comments | Inline descriptions. | **Yes** | Explain label encoder fits and standard scaler transforms. |
+| **6** | Modular Design | Separate modules. | **Yes** | Split data processing and server components. |
+| **7** | No Redundant Code | No duplicate functions. | **Yes** | Unnecessary calculation loops and test scripts removed. |
+| **8** | Error Handling | Gracious error catch rules. | **Yes** | Backend intercepts incorrect types and missing JSON fields. |
 
 ---
 
@@ -32,7 +32,6 @@ Identify codebase segments that can be repurposed in future financial prediction
 
 | S.No | Component / Module Name | Language / Technology | Where Reused | Reusability Level (High / Medium / Low) |
 | :--- | :--- | :--- | :--- | :--- |
-| **1** | `preprocessor_pipeline` | Python (scikit-learn) | Reused in training script, test suites, and backend production routing. | **High** |
-| **2** | `glassmorphic_form_card` | HTML5 / CSS3 | Can be repurposed for any input forms requiring glassmorphism aesthetics. | **High** |
-| **3** | `ajax_form_submitter` | JavaScript (Fetch API) | Reusable fetch wrapper for POST request interactions. | **Medium** |
-| **4** | `underwriting_guardrail_veto` | Python | Easily reusable in credit scoring or risk estimation engines. | **High** |
+| **1** | Model Preprocessing pipeline | Python / scikit-learn | Reused inside `train_model.py` and `app.py`. | **High** |
+| **2** | Underwriting veto logic checks | Python | Evaluates DTI, LTI limits, and Credit history parameters. | **High** |
+| **3** | Dynamic theme toggler script | Vanilla CSS / JS | Custom CSS variables switchable across dark and light states. | **High** |

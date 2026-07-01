@@ -15,11 +15,11 @@ Identify potential solutions, components, and enhancements for the automated loa
 
 | S.No | Idea Category | Description / Proposed Idea | Focus Area |
 | :--- | :--- | :--- | :--- |
-| **1** | Machine Learning | Train a Random Forest classifier with hyperparameter tuning to optimize predict accuracy. | Model Performance |
-| **2** | User Interface | Implement a clean Web application using glassmorphism styling and dark/light mode toggling. | User Experience |
-| **3** | Rules Guardrails | Add strict underwriting rules (like Credit History veto) alongside ML probability predictions. | Risk Mitigation |
-| **4** | Real-Time API | Develop a Flask micro-service with a JSON API endpoint `/predict` for seamless integrations. | System Architecture |
-| **5** | Data Pipeline | Build an automatic numerical imputation and preprocessing pipeline inside model loaders. | Maintainability |
+| **1** | Machine Learning | Train a Random Forest Classifier and scale categorical inputs using a robust scikit-learn LabelEncoder pipeline. | Model Predictive Power |
+| **2** | Rules Safeguards | Add a strict credit veto module in the Flask app to instantly reject Credit_History = 0.0 profiles, mimicking real bank risk limits. | Risk Management |
+| **3** | Dynamic Telemetry | Build a backend `/model-telemetry` endpoint to feed the model accuracy, training duration, and feature importance to the frontend. | System Transparency |
+| **4** | UI Theme Control | Build a lightweight theme toggler between Dark Mode (deep blue/slate) and Light Mode (clean gray) using CSS variables. | Interface Ergonomics |
+| **5** | Stepped AI Loader | Create a multi-stage loading animation during POST requests to outline the AI evaluation phases to the user. | User Engagement |
 
 ---
 
@@ -29,8 +29,8 @@ Evaluate the brainstorming ideas against feasibility and importance metrics to s
 
 | S.No | Idea | Feasibility (1-5) | Importance (1-5) | Priority Rank | Selected (Yes / No) |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **1** | Machine Learning Model | 5 | 5 | 1 | **Yes** |
-| **2** | UI Dark/Light Theme Webpage | 5 | 4 | 2 | **Yes** |
-| **3** | Underwriting Rule Guardrails | 5 | 5 | 1 | **Yes** |
-| **4** | Flask REST API Backend | 4 | 5 | 2 | **Yes** |
-| **5** | Automatic Preprocessing Pipeline | 5 | 4 | 3 | **Yes** |
+| **1** | Multi-Classifier Pipeline (RF, GB, SVM, KNN) | 5 | 5 | 1 | **Yes** |
+| **2** | Hard Cutoff Credit Underwriting Veto Rules | 5 | 5 | 1 | **Yes** |
+| **3** | Responsive Glassmorphism Input Form | 5 | 4 | 2 | **Yes** |
+| **4** | Real-Time Telemetry and Insights REST Endpoint | 4 | 5 | 2 | **Yes** |
+| **5** | Stepped Loader Visual Feedback | 5 | 4 | 3 | **Yes** |

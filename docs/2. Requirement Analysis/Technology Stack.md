@@ -15,9 +15,8 @@ Identify and justify the specific technologies chosen for each layer of the Smar
 
 | S.No | Architecture Component / Layer | Technology Chosen | Justification / Purpose |
 | :--- | :--- | :--- | :--- |
-| **1** | **Frontend / Client-Side** | - HTML5<br>- Vanilla CSS3<br>- Vanilla JavaScript (ES6) | Provides a lightweight, responsive, and cross-browser compatible client interface without bulky framework dependencies. |
-| **2** | **Backend / Server-Side** | - Python 3.9+<br>- Flask Framework | Allows direct loading of scikit-learn ML components, serving endpoints with minimal boilerplate. |
-| **3** | **Database / Data Storage** | - JSON Local storage (in-memory model cache) | Serves model parameters and configuration files dynamically; doesn't require heavyweight external database configuration for simple prediction requests. |
-| **4** | **Cloud / Hosting / Deployment** | - Render / PythonAnywhere / Heroku | Highly suitable for hosting simple Flask micro-services with automatic GitHub repository deployment integrations. |
-| **5** | **Version Control & CI/CD** | - Git & GitHub | Ensures secure source control tracking, commit isolation, and remote code synchronization. |
-| **6** | **Third-Party APIs / Other Tools** | - Chart.js / FontAwesome | Dynamic visualization of financial indicators and sleek modern vector iconography. |
+| **1** | **Frontend / Client-Side** | HTML5, Vanilla CSS3 (CSS Variables, Flexbox, Grids), Vanilla JavaScript (ES6, fetch API) | Eliminates overhead, improves page load latency, and allows complete styling control over custom dark/light theme grids. |
+| **2** | **Backend / Server-Side** | Python 3.9+, Flask Web Framework | Micro-service structure highly compatible with numerical python modules and ML pipelines. |
+| **3** | **Machine Learning Engine** | scikit-learn (Random Forest, Gradient Boosting, SVM, KNN, Logistic Regression) | Offers robust classification algorithms, pipeline integration, and feature evaluation modules. |
+| **4** | **Data Serialization** | joblib (Pickle replacement) | Highly efficient for serializing large NumPy arrays, StandardScaler, and LabelEncoder lists into a unified pickle package. |
+| **5** | **Version Control & CI/CD** | Git & GitHub | Coordinates code commits, branches, and remote deployment pushes. |

@@ -15,9 +15,9 @@ Document the current architectural limitations of the implemented solution.
 
 | S.No | Limitation | Impact | Priority to Address (High / Medium / Low) |
 | :--- | :--- | :--- | :--- |
-| **1** | Local joblib Model Store | Swapping models requires manual file replacement inside workspace cache. | Medium |
-| **2** | Single Instance Web Server | High concurrent traffic might saturate the single-threaded Flask development server. | High |
-| **3** | Lack of Historical Logs | Admin cannot trace past prediction outputs for auditing purposes. | Medium |
+| **1** | Local joblib storage | Retraining models requires manual replacement of the pkl model artifact. | Medium |
+| **2** | Local browser history | Historical query tracking is isolated to local browser cache. | Medium |
+| **3** | Single-threaded server | High concurrent user load can saturate Flask backend performance. | High |
 
 ---
 
@@ -27,10 +27,10 @@ Outline the upgrades needed to scale the application to handle higher enterprise
 
 | S.No | Scalability Aspect | Current State | Proposed Upgrade / Solution |
 | :--- | :--- | :--- | :--- |
-| **1** | User Load | Serves local requests on single server thread. | Deploy via Nginx load balancers on Gunicorn workers. |
-| **2** | Data Storage | Relies on simple CSV file models. | Implement a PostgreSQL relational store to save applicant query profiles. |
-| **3** | Performance | In-memory classification processing. | Use Redis caching for redundant identical profiles. |
-| **4** | Security | Standard HTTP data transmission. | Implement TLS certificates (HTTPS) and API JWT token validation. |
+| **1** | Server Load | Single thread local process. | Deploy on Gunicorn workers with Nginx web proxy. |
+| **2** | Data Storage | Memory model cache, local storage history. | Integrate PostgreSQL server databases to log queries. |
+| **3** | Performance | Real-time classification scaler transforms. | Cache predictions for recurring profiles using Redis. |
+| **4** | Security | Unencrypted HTTP API. | Enforce HTTPS TLS certs and protect routes via JWT tokens. |
 
 ---
 
@@ -40,7 +40,7 @@ Map out the multi-phase deployment roadmap for future features:
 
 | Phase | Planned Feature / Enhancement | Target Timeline | Expected Impact |
 | :--- | :--- | :--- | :--- |
-| **Phase 1** | Model Registry Integration | Month 1 | Automatic staging and swapping of new ML models. |
-| **Phase 2** | Customer Login Dashboard | Month 2 | Applicants can view and trace past submission outcomes. |
-| **Phase 3** | Multi-Branch Analytics | Month 4 | Visual aggregate charts for banking directors to monitor approvals. |
-| **Phase 4** | Automated Retraining | Month 6 | Continuous model optimization loops based on realized defaults. |
+| **Phase 1** | Model Registry Deployment | Month 1 | Seamless swapping of optimized classifiers. |
+| **Phase 2** | Customer Logins | Month 2 | Secure portal for users to view past approvals. |
+| **Phase 3** | Admin Analytics Panel | Month 4 | Real-time graphs showing monthly loan volumes. |
+| **Phase 4** | Automated Retraining Loops | Month 6 | Automatically update weights based on loan default data. |

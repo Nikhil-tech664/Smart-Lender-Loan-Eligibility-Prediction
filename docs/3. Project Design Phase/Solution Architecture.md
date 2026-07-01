@@ -16,32 +16,33 @@ Replicate the structural layout to map the presentation, application gateway, co
 ```
 +-----------------------------------------------------------+
 |                 PRESENTATION / CLIENT LAYER               |
-|  - Web UI Panel (Responsive HTML5 / Vanilla CSS3)         |
-|  - AJAX Fetch Request Handler (Vanilla JavaScript ES6)    |
+|  - Web UI Panel (index.html, style.css)                   |
+|  - AJAX Fetch controller (main.js)                        |
 +-----------------------------------------------------------+
                              | |
                              | | (JSON REST Request/Response)
                              v v
 +-----------------------------------------------------------+
 |                 API GATEWAY / ROUTING LAYER               |
-|  - Flask Application Server (`app.py` routing engine)     |
-|  - Input Validation & Error Handling Middleware           |
+|  - Flask Application Server (`app.py`)                    |
+|  - Input Validation & Error Payload Controller            |
 +-----------------------------------------------------------+
                              | |
-                             | | (Preprocessed Vector)
+                             | | (Scaled Feature DataFrame)
                              v v
 +-----------------------------------------------------------+
 |                     CORE SERVICE LAYER                    |
-|  - Machine Learning Predictor (Random Forest Model)        |
-|  - Underwriting Rules Engine (Credit History Veto)        |
+|  - LabelEncoder & StandardScaler preprocessing           |
+|  - Random Forest Classifier probability check             |
+|  - Rules Guardrails Veto Logic (Credit history checks)     |
 +-----------------------------------------------------------+
                              | |
                              | | (Load Preprocessor/Model)
                              v v
 +-----------------------------------------------------------+
 |                    DATA / STORAGE LAYER                   |
-|  - Model Storage (`model/loan_model.pkl` cache)          |
-|  - Logs / Analytics File Stores                           |
+|  - joblib Model Storage (`model/loan_model.pkl`)          |
+|  - Synthetic Dataset repository (`dataset/loan_data.csv`) |
 +-----------------------------------------------------------+
 ```
 
@@ -53,7 +54,7 @@ Define the roles and responsibilities of each architectural component.
 
 | Component Name | Description / Role in Architecture | Technologies Used |
 | :--- | :--- | :--- |
-| **Presentation Layer** | Renders the applicant form, dark/light theme switch, AJAX results display. | HTML5, CSS3, JavaScript (Fetch API) |
-| **API Gateway** | Directs client URL requests to specific controller routes, validating request headers. | Flask Route Controllers |
-| **Core Services** | Performs numerical scaling, processes prediction metrics, and implements logic vetos. | Python, scikit-learn, joblib |
-| **Database / Storage** | Serializes the trained Random Forest classifier model and feature scalers. | joblib (.pkl) storage |
+| **Presentation Layer** | Serves as the interactive form frontend, implementing visual loaders and dark/light toggles. | HTML5, CSS Variables, JavaScript |
+| **API Gateway** | Manages routing endpoints (`/`, `/health`, `/predict`, `/model-telemetry`), parsing JSON input payloads. | Flask Routing |
+| **Core Services** | Preprocesses raw inputs using StandardScaler, handles categorical label conversions, and checks veto conditions. | Python, Pandas, NumPy, scikit-learn |
+| **Database / Storage** | Stores pre-calculated encoders, scalers, best model artifacts, and evaluation telemetry metrics. | joblib Serialization |
