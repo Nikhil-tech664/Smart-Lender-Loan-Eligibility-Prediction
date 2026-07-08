@@ -179,9 +179,9 @@ def predict():
         explanations = []
         smart_insights = []
 
-        smart_insights.append(f"Combined Household Monthly Income: ${total_income:,.2f} USD")
+        smart_insights.append(f"Combined Household Monthly Income: ₹{total_income:,.2f} INR")
         smart_insights.append(f"Requested Loan Amount represents {income_to_loan_ratio}x annual income.")
-        smart_insights.append(f"Estimated Monthly Loan Obligation: ${estimated_monthly_payment:,.2f} USD ({debt_ratio_estimate}% debt ratio).")
+        smart_insights.append(f"Estimated Monthly Loan Obligation: ₹{estimated_monthly_payment:,.2f} INR ({debt_ratio_estimate}% debt ratio).")
 
         if is_eligible:
             result_message = "Congratulations! Your loan application meets institutional eligibility criteria."

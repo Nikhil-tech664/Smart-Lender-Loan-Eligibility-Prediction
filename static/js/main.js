@@ -57,10 +57,68 @@ document.addEventListener('DOMContentLoaded', () => {
     // Loan Amount Input <-> Slider Sync
     loanAmountInput.addEventListener('input', () => {
         loanAmountSlider.value = loanAmountInput.value;
+        updateRealTimePrecalc();
     });
 
     loanAmountSlider.addEventListener('input', () => {
         loanAmountInput.value = loanAmountSlider.value;
+        updateRealTimePrecalc();
+    });
+
+    const applicantIncomeInput = document.getElementById('applicantIncome');
+    const coapplicantIncomeInput = document.getElementById('coapplicantIncome');
+    const loanTermSelect = document.getElementById('loanTerm');
+    const creditHistorySelect = document.getElementById('creditHistory');
+
+    const preCalcWidget = document.getElementById('preCalcWidget');
+    const preCalcLTI = document.getElementById('preCalcLTI');
+    const preCalcMonthly = document.getElementById('preCalcMonthly');
+    const preCalcDTI = document.getElementById('preCalcDTI');
+    const creditHistoryVetoWarning = document.getElementById('creditHistoryVetoWarning');
+    const dtiVetoWarning = document.getElementById('dtiVetoWarning');
+
+    function updateRealTimePrecalc() {
+        const appIncome = parseFloat(applicantIncomeInput.value) || 0;
+        const coIncome = parseFloat(coapplicantIncomeInput.value) || 0;
+        const loanAmt = parseFloat(loanAmountInput.value) || 0;
+        const term = parseFloat(loanTermSelect.value) || 360;
+        const creditHist = creditHistorySelect.value;
+
+        if (appIncome <= 0 && loanAmt <= 0) {
+            preCalcWidget.classList.add('d-none');
+            return;
+        }
+
+        preCalcWidget.classList.remove('d-none');
+
+        const totalIncome = appIncome + coIncome;
+        const annualIncome = totalIncome * 12;
+        const loanAmtActual = loanAmt * 1000;
+        const lti = totalIncome > 0 ? (loanAmtActual / (annualIncome + 1e-5)) : 0;
+        const estMonthly = term > 0 ? (loanAmtActual / term) : 0;
+        const dti = totalIncome > 0 ? ((estMonthly / (totalIncome + 1e-5)) * 100) : 0;
+
+        preCalcLTI.textContent = lti.toFixed(2) + 'x';
+        preCalcMonthly.textContent = '₹' + estMonthly.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        preCalcDTI.textContent = dti.toFixed(1) + '%';
+
+        // Check Credit Veto Alert
+        if (creditHist === '0.0') {
+            creditHistoryVetoWarning.classList.remove('d-none');
+        } else {
+            creditHistoryVetoWarning.classList.add('d-none');
+        }
+
+        // Check DTI Veto Alert
+        if (dti > 85.0) {
+            dtiVetoWarning.classList.remove('d-none');
+        } else {
+            dtiVetoWarning.classList.add('d-none');
+        }
+    }
+
+    [applicantIncomeInput, coapplicantIncomeInput, loanTermSelect, creditHistorySelect].forEach(el => {
+        if (el) el.addEventListener('input', updateRealTimePrecalc);
     });
 
     // Analytics Modal Data Fetcher
@@ -76,6 +134,61 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('telemetryAccuracy').textContent = `${(data.metrics.accuracy * 100).toFixed(1)}%`;
                 document.getElementById('telemetryF1').textContent = `${(data.metrics.f1_score * 100).toFixed(1)}%`;
                 document.getElementById('telemetryAUC').textContent = `${(data.metrics.roc_auc * 100).toFixed(1)}%`;
+
+                // Render Model Comparison Bar Chart
+                const chartCanvas = document.getElementById('modelTelemetryBarChart');
+                if (chartCanvas && data.all_models_benchmarks) {
+                    const ctxBar = chartCanvas.getContext('2d');
+                    if (window.telemetryBarChartObj) window.telemetryBarChartObj.destroy();
+                    
+                    const labels = Object.keys(data.all_models_benchmarks);
+                    const accuracies = labels.map(l => (data.all_models_benchmarks[l].accuracy * 100).toFixed(1));
+                    const f1Scores = labels.map(l => (data.all_models_benchmarks[l].f1_score * 100).toFixed(1));
+
+                    window.telemetryBarChartObj = new Chart(ctxBar, {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [
+                                {
+                                    label: 'Accuracy (%)',
+                                    data: accuracies,
+                                    backgroundColor: 'rgba(23, 162, 184, 0.75)',
+                                    borderColor: 'rgba(23, 162, 184, 1)',
+                                    borderWidth: 1
+                                },
+                                {
+                                    label: 'F1 Score (%)',
+                                    data: f1Scores,
+                                    backgroundColor: 'rgba(255, 193, 7, 0.75)',
+                                    borderColor: 'rgba(255, 193, 7, 1)',
+                                    borderWidth: 1
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    labels: { color: '#ffffff' }
+                                }
+                            },
+                            scales: {
+                                x: {
+                                    grid: { color: 'rgba(255,255,255,0.05)' },
+                                    ticks: { color: '#ffffff', font: { size: 10 } }
+                                },
+                                y: {
+                                    grid: { color: 'rgba(255,255,255,0.05)' },
+                                    ticks: { color: '#ffffff' },
+                                    min: 0,
+                                    max: 100
+                                }
+                            }
+                        }
+                    });
+                }
 
                 // Render Model Comparison Table
                 const tbody = document.getElementById('modelComparisonTbody');
@@ -186,7 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="badge ${isApp ? 'bg-success' : 'bg-danger'} px-3 py-2 fs-6">${item.status} (${item.probability}%)</span>
                         <small class="text-muted">${item.timestamp}</small>
                     </div>
-                    <p class="mb-2 small text-light">Income: $${item.inputs.ApplicantIncome} | Loan: $${item.inputs.LoanAmount}k | Credit: ${item.inputs.Credit_History}</p>
+                    <p class="mb-2 small text-light">Income: ₹${item.inputs.ApplicantIncome} | Loan: ₹${item.inputs.LoanAmount}k | Credit: ${item.inputs.Credit_History}</p>
                     <button class="btn btn-sm btn-outline-info reuse-btn" data-idx="${idx}"><i class="fas fa-redo me-1"></i> Reuse Form Inputs</button>
                 </div>
             `;
