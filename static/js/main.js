@@ -40,6 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
         updateThemeIcon(theme);
     });
 
+    // Initial default call
+    setTimeout(() => {
+        updateLakhsDisplay();
+        updateRealTimePrecalc();
+    }, 100);
+
     function updateThemeIcon(theme) {
         themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
     }
@@ -50,18 +56,36 @@ document.addEventListener('DOMContentLoaded', () => {
             loanForm.reset();
             loanForm.classList.remove('was-validated');
             loanAmountSlider.value = 150;
+            loanAmountInput.value = 150;
             resultCard.classList.add('d-none');
+            updateLakhsDisplay();
+            updateRealTimePrecalc();
         });
+    }
+
+    const loanAmountLakhsDisplay = document.getElementById('loanAmountLakhsDisplay');
+
+    function updateLakhsDisplay() {
+        const val = parseFloat(loanAmountInput.value) || 0;
+        const totalRupees = val * 1000;
+        if (totalRupees >= 100000) {
+            const lakhs = totalRupees / 100000;
+            loanAmountLakhsDisplay.textContent = `₹${lakhs.toFixed(2)} Lakhs (₹${totalRupees.toLocaleString('en-IN')})`;
+        } else {
+            loanAmountLakhsDisplay.textContent = `₹${totalRupees.toLocaleString('en-IN')}`;
+        }
     }
 
     // Loan Amount Input <-> Slider Sync
     loanAmountInput.addEventListener('input', () => {
         loanAmountSlider.value = loanAmountInput.value;
+        updateLakhsDisplay();
         updateRealTimePrecalc();
     });
 
     loanAmountSlider.addEventListener('input', () => {
         loanAmountInput.value = loanAmountSlider.value;
+        updateLakhsDisplay();
         updateRealTimePrecalc();
     });
 
@@ -332,6 +356,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         loanAmountSlider.value = loanAmountInput.value;
+        updateLakhsDisplay();
+        updateRealTimePrecalc();
     }
 
     // Form Submission with Stepped Loader & Hyper-Polish Effects
