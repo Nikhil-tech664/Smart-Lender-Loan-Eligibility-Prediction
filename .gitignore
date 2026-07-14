@@ -5,6 +5,7 @@ venv/
 env/
 .env
 *.pkl
+!model/loan_model.pkl
 *.log
 .DS_Store
 .idea/
